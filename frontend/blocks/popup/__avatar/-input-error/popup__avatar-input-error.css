@@ -1,0 +1,16 @@
+.popup__avatar-input-error{
+	position: absolute;
+  top: 210px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__avatar-input-error {
+    top: 216px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .popup__avatar-input-error {
+    top: 219px;
+  }
+}

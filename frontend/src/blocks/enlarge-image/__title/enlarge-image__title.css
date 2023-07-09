@@ -1,0 +1,11 @@
+.enlarge-image__title {
+	position: absolute;
+	margin: 0;
+	bottom: -22px;
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 15px;
+	color: #FFFFFF;
+}

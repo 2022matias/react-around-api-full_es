@@ -1,0 +1,10 @@
+.element__heart {
+  border: none;
+  background-image: url(././src/images/corazon-sin-fondo.png);
+  width: 20.76px;
+  height: 18.13px;
+}
+
+.element__heart:hover {
+  opacity: 0.6;
+}

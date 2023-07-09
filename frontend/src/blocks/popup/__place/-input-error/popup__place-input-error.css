@@ -1,0 +1,16 @@
+.popup__place-input-error {
+	position: absolute;
+  top: 149px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__place-input-error {
+    top: 150px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .popup__place-input-error {
+    top: 163px;
+  }
+}

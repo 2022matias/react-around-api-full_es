@@ -1,0 +1,11 @@
+.popup__close-icon-card{
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: -39px;
+  right: 0;
+}
+
+.popup__close-icon-card:hover{
+  opacity: 0.6;
+}

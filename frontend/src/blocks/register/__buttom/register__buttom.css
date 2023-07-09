@@ -1,0 +1,8 @@
+.register__buttom {
+    position: absolute;
+    width: 358px;
+    bottom: 32px;
+    height: 50px;
+    background: #FFFFFF;
+    border-radius: 2px;
+}

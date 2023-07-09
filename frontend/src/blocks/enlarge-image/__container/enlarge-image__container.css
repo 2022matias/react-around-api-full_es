@@ -1,0 +1,22 @@
+.enlarge-image__container {
+	position: fixed;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+	width: 240px;
+	height: 299px;
+}
+		
+@media screen and (min-width: 768px) {
+	.enlarge-image__container {
+		width: 350px;
+		height: 330px;
+	}
+}
+		
+@media screen and (min-width: 1280px) {
+	.enlarge-image__container {
+		width: 816px;
+		height: 540px;
+	}
+}

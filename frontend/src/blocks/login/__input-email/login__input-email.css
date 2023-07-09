@@ -1,0 +1,14 @@
+.login__input-email {
+    position: absolute;
+    width: 358px;
+    top: 79px;
+    background: #000000;
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #CCCCCC;
+}

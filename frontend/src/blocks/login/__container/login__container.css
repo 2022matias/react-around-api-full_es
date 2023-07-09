@@ -1,0 +1,10 @@
+.login__container {
+    position: relative;
+    margin: 0 auto;
+    background: #000000;
+    width: 358px;
+    height: 461px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
