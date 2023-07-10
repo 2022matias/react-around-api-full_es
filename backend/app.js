@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const auth = require('./middleware/auth');
+require('dotenv').config();
 const bodyParser = require('body-parser');
 
 const { PORT = 3000 } = process.env;
@@ -15,12 +17,16 @@ app.use((req, res, next) => {
   next();
 });
 
-const routerUser = require('./routes/users');
+// const routerUser = require('./routes/users');
 const routerCards = require('./routes/cards');
+const routerLogin = require('./routes/login');
+const createUser = require('./routes/createUser');
 
 app.use(express.urlencoded({ extended: true }));
-app.use('/users', routerUser);
-app.use('/cards', routerCards);
+app.use('/signin', routerLogin);
+app.use('/signup', createUser);
+app.use(auth);
+app.use('/cards', auth, routerCards);
 
 app.use('/', (req, res) => {
   res.status(404).send({ message: 'Recurso solicitado no encontrado' });
