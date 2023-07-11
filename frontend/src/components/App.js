@@ -32,6 +32,7 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [isRegister, setIsRegister] = React.useState(false);
+  const [token, setToken] = React.useState(localStorage.getItem('token'));
   const navigate = useNavigate();
 
   React.useEffect(() => {
