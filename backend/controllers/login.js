@@ -1,27 +1,27 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const { notFoundError } = require('../errors/notFoundError');
+const { badRequestError } = require('../errors/badRequestError');
 
 module.exports.login = (req, res) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).select('+password')
     .then((user) => {
-      if (!user) {
-        return res.status(404).json({ message: 'Usuario o contraseña incorrecta' });
+      if (!card) {
+        throw new notFoundError('Usuario no encontrado');
       }
       bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            return res.status(400).json({ message: 'usuario o contraseña incorrecta' });
+            throw new badRequestError('La solicitud enviada es incorrecta');
           }
           const payload = { _id: user._id };
           const { NODE_ENV, JWT_SECRET } = process.env;
           const token = jwt.sign(payload, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
           res.send({ token });
         })
-        .catch((err) => {
-          res.status(401).send({ message: err.message });
-        });
+        .catch(next);
     });
 }

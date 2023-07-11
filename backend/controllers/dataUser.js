@@ -1,12 +1,13 @@
 const User = require('../models/user');
+const { badRequestError } = require('../errors/badRequestError');
 
 module.exports.dataUser = (req, res) => {
   User.find({})
-    .then((users) => res.send(users))
-    .catch((err) => {
-      if (err.name === 'SomeErrorName') {
-        return res.status(400).send({ message: 'Se pasaron datos inválidos' });
+    .then((users) => {
+      if (!users) {
+        throw new badRequestError('La solicitud enviada es incorrecta');
       }
-      res.status(500).send({ message: 'Error interno del servidor' });
-    });
-};
+      res.send(users);
+    })
+    .catch(next);
+}

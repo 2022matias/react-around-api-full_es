@@ -25,13 +25,11 @@ app.use('/users/me', auth, routerDataUser);
 
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
-  res
-    .status(statusCode)
-    .send({
-      message: statusCode === 500
-        ? 'Se ha producido un error en el servidor'
-        : message
-    });
+  res.status(statusCode).send({
+    message: statusCode === 500
+      ? 'Se ha producido un error en el servidor'
+      : message
+  });
 });
 
 app.listen(PORT);
