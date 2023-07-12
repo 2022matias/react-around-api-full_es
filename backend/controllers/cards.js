@@ -2,16 +2,6 @@ const Card = require('../models/card');
 const { notFoundError } = require('../errors/notFoundError');
 const { badRequestError } = require('../errors/badRequestError');
 
-// module.exports.getCards = (req, res) => {
-//   Card.find({})
-//     .then((cards) => res.send({ data: cards }))
-//     .catch((err) => {
-//       if (err.name === 'SomeErrorName') {
-//         return res.status(400).send({ message: 'Se pasaron datos inválidos' });
-//       }
-//       res.status(500).send({ message: 'Error interno del servidor' });
-//     });
-// };
 module.exports.getCards = (req, res) => {
   Card.find({})
     .then((cards) => {

@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const auth = require('./middleware/auth');
 require('dotenv').config();
 const bodyParser = require('body-parser');
+const { errors } = require('celebrate');
+
 
 const { PORT = 3000 } = process.env;
 
@@ -23,6 +25,7 @@ app.use(auth);
 app.use('/cards', auth, routerCards);
 app.use('/users/me', auth, routerDataUser);
 
+app.use(errors());
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res.status(statusCode).send({

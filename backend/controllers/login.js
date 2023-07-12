@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const { notFoundError } = require('../errors/notFoundError');
-const { badRequestError } = require('../errors/badRequestError');
+const { unauthorizedError } = require('../errors/unauthorizedError');
 
 module.exports.login = (req, res) => {
   const { email, password } = req.body;
@@ -15,7 +15,7 @@ module.exports.login = (req, res) => {
       bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            throw new badRequestError('La solicitud enviada es incorrecta');
+            throw new unauthorizedError('Usuario no autorizado');
           }
           const payload = { _id: user._id };
           const { NODE_ENV, JWT_SECRET } = process.env;
