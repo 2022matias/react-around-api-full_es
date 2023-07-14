@@ -1,7 +1,7 @@
-const unautorizedError = (message) => {
+const unauthorizedError = (message) => {
   const error = new Error(message);
   error.statusCode = 401;
   return error;
 };
 
-module.exports = unautorizedError;
+module.exports = unauthorizedError;
