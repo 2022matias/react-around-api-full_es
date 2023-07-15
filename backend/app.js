@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const auth = require('./middleware/auth');
+const { auth } = require('./middleware/auth');
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
