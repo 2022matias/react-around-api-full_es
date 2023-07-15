@@ -23,7 +23,6 @@ const routerDataUser = require('./routes/dataUser');
 app.use(express.urlencoded({ extended: true }));
 app.use('/signin', routerLogin);
 app.use('/signup', routerCreateUser);
-app.use(auth);
 app.use('/cards', auth, routerCards);
 app.use('/users/me', auth, routerDataUser);
 
