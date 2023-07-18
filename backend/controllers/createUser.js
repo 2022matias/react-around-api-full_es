@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const { badRequestError } = require('../errors/badRequestError');
 
-module.exports.createUser = (req, res) => {
+const createUser = (req, res) => {
   const { name, about, avatar, email, password } = req.body;
 
   bcrypt.hash(password, 10)
@@ -14,3 +14,5 @@ module.exports.createUser = (req, res) => {
     })
     .catch(next);
 }
+
+module.exports = { createUser };
