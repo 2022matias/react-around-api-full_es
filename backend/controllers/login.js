@@ -4,12 +4,12 @@ const User = require('../models/user');
 const { notFoundError } = require('../errors/notFoundError');
 const { unauthorizedError } = require('../errors/unauthorizedError');
 
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).select('+password')
     .then((user) => {
-      if (!card) {
+      if (!user) {
         throw new notFoundError('Usuario no encontrado');
       }
       bcrypt.compare(password, user.password)

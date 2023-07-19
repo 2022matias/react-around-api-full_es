@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
@@ -12,6 +13,8 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/aroundb');
 app.use(bodyParser.json());
 
+app.use(cors());
+app.options('*', cors());
 app.use(requestLogger);
 const routerUser = require('./routes/users');
 const routerCards = require('./routes/cards');
@@ -32,7 +35,7 @@ app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res.status(statusCode).send({
     message: statusCode === 500
-      ? 'Se ha producido un error en el servidor'
+      ? message
       : message
   });
 });

@@ -25,7 +25,7 @@ const userSchema = new Schema({
     },
     default: 'https://practicum-content.s3.us-west-1.amazonaws.com/resources/moved_avatar_1604080799.jpg',
   },
-  mail: {
+  email: {
     type: String,
     required: true,
     unique: true,

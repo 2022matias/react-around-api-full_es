@@ -81,7 +81,7 @@ export class Api {
     return liked ? this.giveLike(cardId) : this.removeLike(cardId);
   }
 
-  updateAvatar({avatar}) {
+  updateAvatar({ avatar }) {
     const requestOptions = {
       method: "PATCH",
       headers: this._header,
@@ -89,15 +89,15 @@ export class Api {
         avatar,
       }),
     };
-  
+
     return this.returnFetch("users/me/avatar", requestOptions);
   }
 }
 
- const api = new Api({
-  authorization: "61c6f68c-f2f6-410f-a75d-8fc57629e184",
-  baseUrl: "https://around.nomoreparties.co/v1/web_es_cohort_04",
+const api = new Api({
+  // authorization: "61c6f68c-f2f6-410f-a75d-8fc57629e184",
+  baseUrl: "http://localhost:3000",
 });
 
- 
+
 export default api;
