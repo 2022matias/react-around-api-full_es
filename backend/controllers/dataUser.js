@@ -1,13 +1,17 @@
 const User = require('../models/user');
 const { badRequestError } = require('../errors/badRequestError');
 
-module.exports.dataUser = (req, res) => {
+const dataUser = (req, res, next) => {
   User.find({})
-    .then((users) => {
-      if (!users) {
+    .then((user) => {
+      if (!user) {
         throw new badRequestError('La solicitud enviada es incorrecta');
       }
-      res.send(users);
+      res.send(user);
     })
     .catch(next);
+}
+
+module.exports = {
+  dataUser
 }

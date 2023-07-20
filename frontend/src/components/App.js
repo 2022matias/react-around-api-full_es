@@ -36,11 +36,12 @@ export default function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    api.getUserInfo().then((res) => {
+    api.getUserInfo(token).then((res) => {
       setCurrentUser(res);
     })
-    api.getCards().then((res) => {
+    api.getCards(token).then((res) => {
       setCards(res);
+      console.log(res);
     })
   }, []);
 
@@ -50,7 +51,7 @@ export default function App() {
       auth.checkToken(token)
         .then((data) => {
           if (data) {
-            setEmail(data.data.email);
+            setEmail(data.email);
             setIsLoggedIn(true);
             navigate('/');
           } else {

@@ -2,7 +2,6 @@ export class Api {
   constructor(options) {
     this._options = options;
     this._header = new Headers();
-    this._header.append("Authorization", this._options.authorization);
     this._header.append("Content-Type", "application/json");
   }
 
@@ -12,18 +11,24 @@ export class Api {
       .catch((res) => Promise.reject(`Error: ${res.status}`));
   }
 
-  getUserInfo() {
+  getUserInfo(token) {
     const requestOptions = {
       method: "GET",
-      headers: this._header,
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...this._header
+      }
     };
     return this.returnFetch("users/me", requestOptions);
   }
 
-  getCards() {
+  getCards(token) {
     const requestOptions = {
       method: "GET",
-      headers: this._header,
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...this._header
+      }
     };
     return this.returnFetch("cards", requestOptions);
   }
