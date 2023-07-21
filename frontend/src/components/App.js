@@ -40,8 +40,8 @@ export default function App() {
       setCurrentUser(res);
     })
     api.getCards(token).then((res) => {
-      setCards(res);
-      console.log(res);
+      setCards(res.res);
+      console.log(res.data[0].name);
     })
   }, []);
 
@@ -51,11 +51,11 @@ export default function App() {
       auth.checkToken(token)
         .then((data) => {
           if (data) {
-            setEmail(data.email);
+            setEmail(data[0].email);
             setIsLoggedIn(true);
             navigate('/');
           } else {
-            console.log('El token no es válido.');
+            alert('El token no es válido.');
             navigate('/signin');
           }
         })
@@ -108,7 +108,8 @@ export default function App() {
 
   function handleUpdatePlace({ place, url }) {
     api.addCard(place, url).then((res) => {
-      setCards([res, ...cards]);
+      // console.log(res);
+      setCards([res.res, ...cards]);
       onAddPlaceClick();
     })
   }
