@@ -36,14 +36,14 @@ export default function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    api.getUserInfo(token).then((res) => {
-      setCurrentUser(res);
+    api.getUserInfo(token).then((data) => {
+      setCurrentUser(data[0]);
     })
     api.getCards(token).then((res) => {
       setCards(res.res);
-      console.log(res.data[0].name);
+      console.log(res.data[0]);
     })
-  }, []);
+  }, [token]);
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -108,7 +108,7 @@ export default function App() {
 
   function handleUpdatePlace({ place, url }) {
     api.addCard(place, url).then((res) => {
-      // console.log(res);
+      console.log(res);
       setCards([res.res, ...cards]);
       onAddPlaceClick();
     })

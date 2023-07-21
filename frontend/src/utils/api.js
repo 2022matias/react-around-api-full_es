@@ -46,10 +46,13 @@ export class Api {
     return this.returnFetch("users/me", requestOptions);
   }
 
-  addCard(name, link) {
+  addCard(name, link, token) {
     const requestOptions = {
       method: "POST",
-      headers: this._header,
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...this._header
+      },
       body: JSON.stringify({
         name: name,
         link: link,
@@ -57,6 +60,9 @@ export class Api {
     };
     return this.returnFetch("cards", requestOptions);
   }
+
+
+
 
   deleteCard(id) {
     const requestOptions = {
