@@ -36,13 +36,15 @@ export default function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    api.getUserInfo(token).then((data) => {
-      setCurrentUser(data[0]);
+    api.getUserInfo(localStorage.getItem('token')).then((data) => {
+      console.log(data);
+      setCurrentUser(data);
+
     })
     api.getCards(token).then((res) => {
       setCards(res.data);
     })
-  }, []);
+  }, isLoggedIn);
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -50,7 +52,8 @@ export default function App() {
       auth.checkToken(token)
         .then((data) => {
           if (data) {
-            setEmail(data[0].email);
+            console.log(data);
+            setEmail(data.email);
             setIsLoggedIn(true);
             navigate('/');
           } else {
@@ -106,8 +109,7 @@ export default function App() {
   }
 
   function handleUpdatePlace({ name, link }) {
-    api.addCard(name, link).then((res) => {
-      console.log(res);
+    api.addCard(name, link, localStorage.getItem('token')).then((res) => {
       setCards([res.res, ...cards]);
       onAddPlaceClick();
     })
@@ -134,6 +136,7 @@ export default function App() {
   function signOut() {
     localStorage.removeItem('token');
     navigate('/signin');
+    setEmail("");
     setIsLoggedIn(false);
   }
 
@@ -161,8 +164,8 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={onEditProfileClick} onUpdateUser={handleUpdateUser} />
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={onEditAvatarClick} onUpdateAvatar={handleUpdateAvatar} />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={onEditProfileClick} onUpdateUser={handleUpdateUser} isLoggedIn={isLoggedIn} />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={onEditAvatarClick} onUpdateAvatar={handleUpdateAvatar} isLoggedIn={isLoggedIn} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={onAddPlaceClick} onAddPlace={handleUpdatePlace} />
         <InfoTooltip isOpen={isInfoTooltipOpen} onClose={onInfoTooltipClick} isRegister={isRegister} />
         <PopupWithForm name={'question'}

@@ -9,7 +9,7 @@ function EditAvatarPopup(props) {
 
   React.useEffect(() => {
     setAvatar(currentUser.avatar);
-  }, [currentUser]);
+  }, [props.isLoggedIn]);
 
 
   function handleInputChange(e) {
