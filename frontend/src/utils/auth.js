@@ -15,6 +15,7 @@ export const register = ({ email, password }) => {
         throw new Error(data.error);
       }
       return data.error;
+
     })
 };
 

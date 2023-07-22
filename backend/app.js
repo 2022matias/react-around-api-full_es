@@ -10,7 +10,13 @@ const { requestLogger, errorLogger } = require('./middleware/logger');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-mongoose.connect('mongodb://localhost:27017/aroundb');
+mongoose.connect('mongodb://localhost:27017/aroundb')
+  .then(() => {
+    console.log('Connected to database ');
+  })
+  .catch((err) => {
+    console.error(`Error connecting to the database. \n${err}`);
+  });
 app.use(bodyParser.json());
 
 app.use(cors());

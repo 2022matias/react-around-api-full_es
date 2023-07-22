@@ -40,10 +40,9 @@ export default function App() {
       setCurrentUser(data[0]);
     })
     api.getCards(token).then((res) => {
-      setCards(res.res);
-      console.log(res.data[0]);
+      setCards(res.data);
     })
-  }, [token]);
+  }, []);
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -106,8 +105,8 @@ export default function App() {
     })
   }
 
-  function handleUpdatePlace({ place, url }) {
-    api.addCard(place, url).then((res) => {
+  function handleUpdatePlace({ name, link }) {
+    api.addCard(name, link).then((res) => {
       console.log(res);
       setCards([res.res, ...cards]);
       onAddPlaceClick();

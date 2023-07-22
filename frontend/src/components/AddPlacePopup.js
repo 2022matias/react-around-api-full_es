@@ -9,8 +9,8 @@ function AddPlacePopup(props) {
   function handleAddPlaceSubmit(e) {
     e.preventDefault();
     props.onAddPlace({
-      place: place,
-      url: url,
+      name: place,
+      link: url,
     })
   }
 

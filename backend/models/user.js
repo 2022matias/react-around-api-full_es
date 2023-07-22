@@ -29,12 +29,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: function (v) {
-        return /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(v);
-      },
-      message: 'Mail inválido',
-    },
+    // validate: {
+    //   validator: function (v) {
+    //     return /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(v);
+    //   },
+    //   message: 'Mail inválido',
+    // },
   },
   password: {
     type: String,
