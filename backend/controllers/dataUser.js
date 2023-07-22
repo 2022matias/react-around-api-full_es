@@ -7,7 +7,7 @@ const dataUser = (req, res, next) => {
       if (!user) {
         throw new badRequestError('La solicitud enviada es incorrecta');
       }
-      res.send(user);
+      res.send({ user });
     })
     .catch(next);
 }

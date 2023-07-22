@@ -26,14 +26,12 @@ const routerUser = require('./routes/users');
 const routerCards = require('./routes/cards');
 const routerLogin = require('./routes/login');
 const routerCreateUser = require('./routes/createUser');
-const routerDataUser = require('./routes/dataUser');
 
 app.use(express.urlencoded({ extended: true }));
 app.use('/signin', routerLogin);
 app.use('/signup', routerCreateUser);
 app.use('/users', routerUser);
 app.use('/cards', routerCards);
-app.use('/users/me', routerDataUser);
 
 app.use(errorLogger);
 app.use(errors());
