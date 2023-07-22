@@ -36,8 +36,8 @@ export default function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    api.getUserInfo(localStorage.getItem('token')).then((data) => {
-      console.log(data);
+    api.getUserInfo(token).then((data) => {
+      // console.log(data);
       setCurrentUser(data);
 
     })
@@ -52,7 +52,7 @@ export default function App() {
       auth.checkToken(token)
         .then((data) => {
           if (data) {
-            console.log(data);
+            // console.log(data);
             setEmail(data.email);
             setIsLoggedIn(true);
             navigate('/');

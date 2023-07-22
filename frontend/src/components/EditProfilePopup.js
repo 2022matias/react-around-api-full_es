@@ -11,7 +11,7 @@ export default function EditProfilePopup(props) {
 
 
   React.useEffect(() => {
-    console.log(currentUser);
+    // console.log(currentUser);
     setName(currentUser.name);
     setDescription(currentUser.about)
   }, [props.isLoggedIn]);
