@@ -10,7 +10,7 @@ routerUser.get('/', getUser);
 routerUser.get('/me', auth, dataUser);
 routerUser.get('/:id', getUserById);
 routerUser.post('/', createUser);
-routerUser.patch('/me', updateProfile);
+routerUser.patch('/me', auth, updateProfile);
 routerUser.patch('/me/avatar', updateAvatar);
 
 module.exports = routerUser;

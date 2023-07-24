@@ -33,10 +33,13 @@ export class Api {
     return this.returnFetch("cards", requestOptions);
   }
 
-  editProfile(name, about) {
+  editProfile(name, about, token) {
     const requestOptions = {
       method: "PATCH",
-      headers: this._header,
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...this._header
+      },
       body: JSON.stringify({
         name: name,
         about: about,

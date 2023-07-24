@@ -37,8 +37,7 @@ export default function App() {
 
   React.useEffect(() => {
     api.getUserInfo(token).then((data) => {
-      // console.log(data);
-      setCurrentUser(data);
+      setCurrentUser(data.user);
 
     })
     api.getCards(token).then((res) => {
@@ -52,8 +51,7 @@ export default function App() {
       auth.checkToken(token)
         .then((data) => {
           if (data) {
-            // console.log(data);
-            setEmail(data.email);
+            setEmail(data.user.email);
             setIsLoggedIn(true);
             navigate('/');
           } else {
@@ -95,7 +93,7 @@ export default function App() {
   }
 
   function handleUpdateUser({ name, about }) {
-    api.editProfile(name, about).then((res) => {
+    api.editProfile(name, about, token).then((res) => {
       setCurrentUser(res);
       onEditProfileClick();
     })

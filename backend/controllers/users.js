@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const { notFoundError } = require('../errors/notFoundError');
+const { NotBeforeError } = require('jsonwebtoken');
 
 const getUser = (req, res) => {
   User.find({})
@@ -26,21 +28,20 @@ const getUserById = (req, res) => {
 };
 
 
-const updateProfile = (req, res) => {
+const updateProfile = (req, res, next) => {
   const { name, about } = req.body;
 
   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true })
     .then((user) => {
-      if (err.name === 'SomeErrorName') {
-        return res.status(400).send({ message: 'Se pasaron datos inválidos' });
-      }
       if (!user) {
-        return res.status(404).send({ message: 'Usuario no encontrado' });
+        throw new NotBeforeError('Usuario no encontrado');
       }
       res.send(user);
     })
-    .catch((err) => res.status(500).send({ message: 'Error interno del servidor' }));
+    .catch(next);
 };
+
+
 
 const updateAvatar = (req, res) => {
   const { avatar } = req.body;
