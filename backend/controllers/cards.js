@@ -2,7 +2,7 @@ const Card = require('../models/card');
 const { notFoundError } = require('../errors/notFoundError');
 const { badRequestError } = require('../errors/badRequestError');
 
-module.exports.getCards = (req, res, next) => {
+const getCards = (req, res, next) => {
   Card.find({})
     .then((cards) => {
       if (!cards) {
@@ -14,7 +14,7 @@ module.exports.getCards = (req, res, next) => {
 }
 
 
-module.exports.createCard = (req, res, next) => {
+const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const owner = req.user._id;
   // console.log(owner);
@@ -30,7 +30,7 @@ module.exports.createCard = (req, res, next) => {
     .catch(next);
 }
 
-module.exports.deleteCard = (req, res, next) => {
+const deleteCard = (req, res, next) => {
   Card.findByIdAndRemove(req.params.id)
     .then((card) => {
       if (!card) {
@@ -41,7 +41,7 @@ module.exports.deleteCard = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.likeCard = (req, res, next) => {
+const likeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.id,
     { $addToSet: { likes: req.user._id } },
@@ -56,7 +56,7 @@ module.exports.likeCard = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.dislikeCard = (req, res, next) => {
+const dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.id,
     { $pull: { likes: req.user._id } },
@@ -70,3 +70,11 @@ module.exports.dislikeCard = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports = {
+  getCards,
+  createCard,
+  deleteCard,
+  likeCard,
+  dislikeCard,
+}

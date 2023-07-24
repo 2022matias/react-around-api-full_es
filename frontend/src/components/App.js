@@ -53,7 +53,10 @@ export default function App() {
           if (data) {
             setEmail(data.user.email);
             setIsLoggedIn(true);
-            navigate('/');
+            api.getUserInfo(token).then((data) => {
+              navigate(`/${data.user._id}`);
+            })
+            // navigate('/');
           } else {
             alert('El token no es válido.');
             navigate('/signin');
@@ -99,8 +102,8 @@ export default function App() {
     })
   }
 
-  function handleUpdateAvatar(avatar) {
-    api.updateAvatar(avatar).then((res) => {
+  function handleUpdateAvatar({ avatar }) {
+    api.updateAvatar(avatar, token).then((res) => {
       setCurrentUser(res);
       onEditAvatarClick();
     })

@@ -17,12 +17,12 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    validate: {
-      validator: function (v) {
-        return /^(http|https):\/\/[^ "]+$/.test(v);
-      },
-      message: 'El link no es correcto',
-    },
+    // validate: {
+    //   validator: function (v) {
+    //     return /^(http|https):\/\/[^ "]+$/.test(v);
+    //   },
+    //   message: 'El link no es correcto',
+    // },
     default: 'https://practicum-content.s3.us-west-1.amazonaws.com/resources/moved_avatar_1604080799.jpg',
   },
   email: {

@@ -95,16 +95,19 @@ export class Api {
     return liked ? this.giveLike(cardId) : this.removeLike(cardId);
   }
 
-  updateAvatar({ avatar }) {
+  updateAvatar(avatar, token) {
     const requestOptions = {
       method: "PATCH",
-      headers: this._header,
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...this._header
+      },
       body: JSON.stringify({
         avatar,
       }),
     };
 
-    return this.returnFetch("users/me/avatar", requestOptions);
+    return this.returnFetch("users/me", requestOptions);
   }
 }
 

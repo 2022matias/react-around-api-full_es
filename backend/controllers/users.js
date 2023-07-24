@@ -1,67 +1,43 @@
 const User = require('../models/user');
 const { notFoundError } = require('../errors/notFoundError');
-const { NotBeforeError } = require('jsonwebtoken');
 
-const getUser = (req, res) => {
+const getUser = (req, res, next) => {
   User.find({})
-    .then((users) => res.send(users))
-    .catch((err) => {
-      if (err.name === 'SomeErrorName') {
-        return res.status(400).send({ message: 'Se pasaron datos inválidos' });
+    .then((users) => {
+      if (!users) {
+        throw new notFoundError('Usuarios no encontrados');
       }
-      res.status(500).send({ message: 'Error interno del servidor' });
-    });
+      res.send(users);
+    })
+    .catch(next);
 };
 
-const getUserById = (req, res) => {
+const getUserById = (req, res, next) => {
   User.findById(req.params.id)
     .then((user) => {
-      if (err.name === 'SomeErrorName') {
-        return res.status(400).send({ message: 'Se pasaron datos inválidos' });
-      }
       if (!user) {
-        return res.status(404).send({ message: 'Usuario no encontrado' });
-      }
-      res.send(user);
-    })
-    .catch((err) => res.status(500).send({ message: 'Error interno del servidor' }));
-};
-
-
-const updateProfile = (req, res, next) => {
-  const { name, about } = req.body;
-
-  User.findByIdAndUpdate(req.user._id, { name, about }, { new: true })
-    .then((user) => {
-      if (!user) {
-        throw new NotBeforeError('Usuario no encontrado');
+        throw new notFoundError('Usuario no encontrado');
       }
       res.send(user);
     })
     .catch(next);
 };
 
+const updateProfile = (req, res, next) => {
+  const { name, about, avatar } = req.body;
 
-
-const updateAvatar = (req, res) => {
-  const { avatar } = req.body;
-
-  User.findByIdAndUpdate(req.user._id, { avatar }, { new: true })
+  User.findByIdAndUpdate(req.user._id, { name, about, avatar }, { new: true })
     .then((user) => {
-      if (err.name === 'SomeErrorName') {
-        return res.status(400).send({ message: 'Se pasaron datos inválidos' });
-      }
       if (!user) {
-        return res.status(404).send({ message: 'Usuario no encontrado' });
+        throw new notFoundError('Usuario no encontrado');
       }
       res.send(user);
     })
-    .catch((err) => res.status(500).send({ message: 'Error interno del servidor' }));
+    .catch(next);
 };
 
 module.exports = {
   getUser,
   getUserById,
-  updateProfile,
-  updateAvatar,
+  updateProfile
 }
