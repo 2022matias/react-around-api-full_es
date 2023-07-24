@@ -33,17 +33,18 @@ export default function App() {
   const [email, setEmail] = React.useState("");
   const [isRegister, setIsRegister] = React.useState(false);
   const [token, setToken] = React.useState(localStorage.getItem('token'));
+  const [user, setUser] = React.useState('');
   const navigate = useNavigate();
 
   React.useEffect(() => {
     api.getUserInfo(token).then((data) => {
       setCurrentUser(data.user);
-
+      setUser(`/${data.user._id}`);
     })
     api.getCards(token).then((res) => {
       setCards(res.data);
     })
-  }, isLoggedIn);
+  }, [navigate]);
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -53,10 +54,8 @@ export default function App() {
           if (data) {
             setEmail(data.user.email);
             setIsLoggedIn(true);
-            api.getUserInfo(token).then((data) => {
-              navigate(`/${data.user._id}`);
-            })
-            // navigate('/');
+            // setUser(`/${data.user._id}`);
+            navigate(user);
           } else {
             alert('El token no es válido.');
             navigate('/signin');
@@ -147,8 +146,8 @@ export default function App() {
         <Header email={email} signOut={signOut} isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path="/signup" element={<Register onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} />} />
-          <Route path="/signin" element={<Login setIsLoggedIn={setIsLoggedIn} updateEmail={updateEmail} onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} />} />
-          <Route path="/" element={
+          <Route path="/signin" element={<Login setIsLoggedIn={setIsLoggedIn} updateEmail={updateEmail} onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} setUser={setUser} user={user} />} />
+          <Route path={user} element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Main
                 cards={cards}
