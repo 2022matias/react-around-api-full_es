@@ -37,6 +37,10 @@ export default function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
+    checkTokenAndRedirect();
+  }, [navigate]);
+
+  function checkTokenAndRedirect() {
     api.getUserInfo(token).then((data) => {
       setCurrentUser(data.user);
       setUser(data.user._id);
@@ -44,9 +48,10 @@ export default function App() {
     api.getCards(token).then((res) => {
       setCards(res.data);
     })
-  }, [navigate]);
+  }
 
-  function checkTokenAndRedirect() {
+
+  React.useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       auth.checkToken(token)
@@ -61,10 +66,6 @@ export default function App() {
           }
         })
     }
-  }
-
-  React.useEffect(() => {
-    checkTokenAndRedirect();
   }, []);
 
 
@@ -151,7 +152,7 @@ export default function App() {
         <Header email={email} signOut={signOut} isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path="/signup" element={<Register onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} isLoggedIn={isLoggedIn} />} />
-          <Route path="/signin" element={<Login setIsLoggedIn={setIsLoggedIn} updateEmail={updateEmail} onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} setUser={setUser} user={user} setToken={setToken} />} />
+          <Route path="/signin" element={<Login setIsLoggedIn={setIsLoggedIn} updateEmail={updateEmail} onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} setUser={setUser} user={user} setToken={setToken} checkTokenAndRedirect={checkTokenAndRedirect} />} />
           <Route path={user} element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Main

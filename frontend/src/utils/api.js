@@ -66,26 +66,35 @@ export class Api {
 
 
 
-  deleteCard(id) {
+  deleteCard(id, token) {
     const requestOptions = {
       method: "DELETE",
-      headers: this._header,
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...this._header
+      },
     };
     return this.returnFetch(`cards/${id}`, requestOptions);
   }
 
-  giveLike(cardId) {
+  giveLike(cardId, token) {
     const requestOptions = {
       method: "PUT",
-      headers: this._header,
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...this._header
+      },
     };
     return this.returnFetch(`cards/likes/${cardId}`, requestOptions);
   }
 
-  removeLike(cardId) {
+  removeLike(cardId, token) {
     const requestOptions = {
       method: "DELETE",
-      headers: this._header,
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...this._header
+      },
     };
     return this.returnFetch(`cards/likes/${cardId}`, requestOptions);
   }

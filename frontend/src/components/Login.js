@@ -26,6 +26,7 @@ function Login(props) {
           props.updateEmail(email);
           setEmail('');
           setPassword('');
+          // props.checkTokenAndRedirect();
           props.setIsLoggedIn(true);
           props.setToken(data.token);
           window.location.reload();
