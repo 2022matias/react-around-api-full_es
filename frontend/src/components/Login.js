@@ -27,11 +27,8 @@ function Login(props) {
           setEmail('');
           setPassword('');
           props.setIsLoggedIn(true);
-          // props.setUser(props.user);
-          // console.log(props.user);
-          // navigate(`/${props.user}`);
-          navigate("/");
-
+          props.setToken(data.token);
+          window.location.reload();
         }
         else {
           props.onIsRegister(false);

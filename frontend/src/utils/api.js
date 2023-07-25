@@ -1,8 +1,7 @@
 export class Api {
   constructor(options) {
     this._options = options;
-    this._header = new Headers();
-    this._header.append("Content-Type", "application/json");
+    this._header = { "Content-Type": "application/json" }
   }
 
   returnFetch(url, requestOptions) {
