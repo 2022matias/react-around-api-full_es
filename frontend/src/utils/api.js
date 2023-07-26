@@ -66,7 +66,7 @@ export class Api {
 
 
 
-  deleteCard(id, token) {
+  deleteCard(_id, token) {
     const requestOptions = {
       method: "DELETE",
       headers: {
@@ -74,7 +74,7 @@ export class Api {
         ...this._header
       },
     };
-    return this.returnFetch(`cards/${id}`, requestOptions);
+    return this.returnFetch(`cards/${_id}`, requestOptions);
   }
 
   giveLike(cardId, token) {

@@ -123,13 +123,13 @@ export default function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+    api.changeLikeCardStatus(card._id, !isLiked, token).then((newCard) => {
       setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
     });
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
+    api.deleteCard(card._id, token).then(() => {
       const newCards = cards.filter((c) => c._id !== card._id);
       setCards(newCards);
     });

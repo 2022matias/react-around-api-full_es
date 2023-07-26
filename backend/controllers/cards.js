@@ -29,13 +29,14 @@ const createCard = (req, res, next) => {
 }
 
 const deleteCard = (req, res, next) => {
-  console.log(req.params.id)
   Card.findByIdAndRemove(req.params.id)
     .then((card) => {
       if (!card) {
         throw new notFoundError('Usuario no encontrado');
       }
+      // if (req.user._id === card.owner.toString()) {
       res.send({ data: card });
+      // }
     })
     .catch(next);
 };
