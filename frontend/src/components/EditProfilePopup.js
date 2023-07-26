@@ -8,12 +8,10 @@ export default function EditProfilePopup(props) {
   const [name, setName] = React.useState();
   const [description, setDescription] = React.useState();
 
-
-
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about)
-  }, [props.isLoggedIn]);
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -28,8 +26,6 @@ export default function EditProfilePopup(props) {
   function handleInputChangeAbout(e) {
     setDescription(e.target.value);
   }
-
-
 
   return (
     <PopupWithForm name={'profile'}

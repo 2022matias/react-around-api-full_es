@@ -5,5 +5,5 @@ export default function ProtectedRoute({ children, ...props }) {
   if (props.isLoggedIn) {
     return children;
   }
-  return <Navigate to="/signin" />;
+  return <Navigate to="/" />;
 }

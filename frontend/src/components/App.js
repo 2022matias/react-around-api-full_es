@@ -37,8 +37,21 @@ export default function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    checkTokenAndRedirect();
-  }, [navigate]);
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth.checkToken(token)
+        .then((data) => {
+          if (data) {
+            setEmail(data.user.email);
+            setIsLoggedIn(true);
+            navigate('/');
+          } else {
+            alert('El token no es válido.');
+            navigate('/signin');
+          }
+        })
+    }
+  }, [isLoggedIn]);
 
   function checkTokenAndRedirect() {
     api.getUserInfo(token).then((data) => {
@@ -50,23 +63,11 @@ export default function App() {
     })
   }
 
-
   React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      auth.checkToken(token)
-        .then((data) => {
-          if (data) {
-            setEmail(data.user.email);
-            setIsLoggedIn(true);
-            navigate('/' + data.user._id);
-          } else {
-            alert('El token no es válido.');
-            navigate('/signin');
-          }
-        })
-    }
-  }, []);
+    checkTokenAndRedirect();
+  }, [token]);
+
+
 
 
 
@@ -145,15 +146,14 @@ export default function App() {
     setEmail("");
     setIsLoggedIn(false);
   }
-
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <Header email={email} signOut={signOut} isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path="/signup" element={<Register onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} isLoggedIn={isLoggedIn} />} />
-          <Route path="/signin" element={<Login setIsLoggedIn={setIsLoggedIn} updateEmail={updateEmail} onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} setUser={setUser} user={user} setToken={setToken} checkTokenAndRedirect={checkTokenAndRedirect} />} />
-          <Route path={user} element={
+          <Route path="/signin" element={<Login setIsLoggedIn={setIsLoggedIn} updateEmail={updateEmail} onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} setCurrentUser={setCurrentUser} user={user} setToken={setToken} checkTokenAndRedirect={checkTokenAndRedirect} />} />
+          <Route path="/" element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Main
                 cards={cards}
