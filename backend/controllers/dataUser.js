@@ -5,7 +5,7 @@ const dataUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {
-        throw new badRequestError('La solicitud enviada es incorrecta');
+        throw badRequestError('La solicitud enviada es incorrecta');
       }
       res.send({ user });
     })

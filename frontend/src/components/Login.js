@@ -27,7 +27,6 @@ function Login(props) {
           setPassword('');
           props.setIsLoggedIn(true);
           props.setToken(data.token);
-          // window.location.reload();
           navigate("/");
         }
         else {

@@ -18,7 +18,7 @@ function Main(props) {
     }
 
     changeImageAvatar();
-  }, []);
+  }, [currentUser]);
 
   return (
     <>

@@ -4,4 +4,4 @@ const badRequestError = (message) => {
   return error;
 };
 
-module.exports = badRequestError;
+module.exports = { badRequestError };

@@ -9,7 +9,7 @@ const createUser = (req, res, next) => {
     .then((hash) => User.create({ name, about, avatar, email, password: hash }))
     .then((user) => {
       if (!user) {
-        throw new badRequestError('La solicitud enviada es incorrecta');
+        throw badRequestError('La solicitud enviada es incorrecta');
       }
       res.send({ data: user });
     })

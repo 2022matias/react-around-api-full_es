@@ -10,12 +10,12 @@ module.exports.login = (req, res, next) => {
   User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        throw new notFoundError('Usuario no encontrado');
+        throw notFoundError('Usuario no encontrado');
       }
       bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            throw new unauthorizedError('Usuario no autorizado');
+            throw unauthorizedError('Usuario no autorizado');
           }
           const payload = { _id: user._id };
           const { NODE_ENV, JWT_SECRET } = process.env;

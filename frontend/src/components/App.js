@@ -54,13 +54,17 @@ export default function App() {
   }, [isLoggedIn]);
 
   React.useEffect(() => {
-    api.getUserInfo(token).then((data) => {
-      setCurrentUser(data.user);
-      setUser(data.user._id);
-    })
-    api.getCards(token).then((res) => {
-      setCards(res.data);
-    })
+    if (token) {
+      api.getUserInfo(token).then((data) => {
+        setCurrentUser(data.user);
+        setUser(data.user._id);
+      })
+      api.getCards(token).then((res) => {
+        setCards(res.data);
+      })
+    } else {
+      navigate('/signin');
+    }
   }, [token]);
 
 
@@ -111,8 +115,8 @@ export default function App() {
   }
 
   function handleUpdatePlace({ name, link }) {
-    api.addCard(name, link, localStorage.getItem('token')).then((res) => {
-      setCards([res.res, ...cards]);
+    api.addCard(name, link, token).then((res) => {
+      setCards([res.data, ...cards]);
       onAddPlaceClick();
     })
   }

@@ -4,4 +4,4 @@ const unauthorizedError = (message) => {
   return error;
 };
 
-module.exports = unauthorizedError;
+module.exports = { unauthorizedError };

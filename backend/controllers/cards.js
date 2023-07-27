@@ -6,7 +6,7 @@ const getCards = (req, res, next) => {
   Card.find({})
     .then((cards) => {
       if (!cards) {
-        throw new badRequestError('La solicitud enviada es incorrecta');
+        throw badRequestError('La solicitud enviada es incorrecta');
       }
       res.send({ data: cards });
     })
@@ -21,7 +21,7 @@ const createCard = (req, res, next) => {
   Card.create({ name, link, owner })
     .then((card) => {
       if (!card) {
-        throw new badRequestError('La solicitud enviada es incorrecta');
+        throw badRequestError('La solicitud enviada es incorrecta');
       }
       res.send({ data: card });
     })
@@ -29,14 +29,12 @@ const createCard = (req, res, next) => {
 }
 
 const deleteCard = (req, res, next) => {
-  Card.findByIdAndRemove(req.params.id)
+  Card.findOneAndRemove({ _id: req.params.id, owner: req.user._id })
     .then((card) => {
       if (!card) {
-        throw new notFoundError('Usuario no encontrado');
+        throw notFoundError('Usuario no encontrado');
       }
-      // if (req.user._id === card.owner.toString()) {
       res.send({ data: card });
-      // }
     })
     .catch(next);
 };
@@ -49,7 +47,7 @@ const likeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        throw new notFoundError('Usuario no encontrado');
+        throw notFoundError('Usuario no encontrado');
       }
       res.send({ data: card });
     })
@@ -64,7 +62,7 @@ const dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        throw new notFoundError('Usuario no encontrado');
+        throw notFoundError('Usuario no encontrado');
       }
       res.send({ data: card });
     })

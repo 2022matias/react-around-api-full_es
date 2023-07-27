@@ -5,7 +5,7 @@ const getUser = (req, res, next) => {
   User.find({})
     .then((users) => {
       if (!users) {
-        throw new notFoundError('Usuarios no encontrados');
+        throw notFoundError('Usuarios no encontrados');
       }
       res.send(users);
     })
@@ -16,7 +16,7 @@ const getUserById = (req, res, next) => {
   User.findById(req.params.id)
     .then((user) => {
       if (!user) {
-        throw new notFoundError('Usuario no encontrado');
+        throw notFoundError('Usuario no encontrado');
       }
       res.send(user);
     })
@@ -29,7 +29,7 @@ const updateProfile = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { name, about, avatar }, { new: true })
     .then((user) => {
       if (!user) {
-        throw new notFoundError('Usuario no encontrado');
+        throw notFoundError('Usuario no encontrado');
       }
       res.send(user);
     })

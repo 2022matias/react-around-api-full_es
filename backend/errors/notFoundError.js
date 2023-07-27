@@ -4,4 +4,4 @@ const notFoundError = (message) => {
   return error;
 };
 
-module.exports = notFoundError;
+module.exports = { notFoundError };
