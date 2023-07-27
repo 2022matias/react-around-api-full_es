@@ -53,7 +53,7 @@ export default function App() {
     }
   }, [isLoggedIn]);
 
-  function checkTokenAndRedirect() {
+  React.useEffect(() => {
     api.getUserInfo(token).then((data) => {
       setCurrentUser(data.user);
       setUser(data.user._id);
@@ -61,10 +61,6 @@ export default function App() {
     api.getCards(token).then((res) => {
       setCards(res.data);
     })
-  }
-
-  React.useEffect(() => {
-    checkTokenAndRedirect();
   }, [token]);
 
 
@@ -123,6 +119,8 @@ export default function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    console.log(isLiked, 'isliked');
+    console.log(currentUser._id, 'currentuserid');
     api.changeLikeCardStatus(card._id, !isLiked, token).then((newCard) => {
       setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
     });
@@ -141,7 +139,6 @@ export default function App() {
 
   function signOut() {
     localStorage.removeItem('token');
-    navigate('/signin');
     setToken(null);
     setEmail("");
     setIsLoggedIn(false);
@@ -152,7 +149,7 @@ export default function App() {
         <Header email={email} signOut={signOut} isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path="/signup" element={<Register onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} isLoggedIn={isLoggedIn} />} />
-          <Route path="/signin" element={<Login setIsLoggedIn={setIsLoggedIn} updateEmail={updateEmail} onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} setCurrentUser={setCurrentUser} user={user} setToken={setToken} checkTokenAndRedirect={checkTokenAndRedirect} />} />
+          <Route path="/signin" element={<Login setIsLoggedIn={setIsLoggedIn} updateEmail={updateEmail} onInfoTooltipClick={onInfoTooltipClick} onIsRegister={onIsRegister} setCurrentUser={setCurrentUser} user={user} setToken={setToken} />} />
           <Route path="/" element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Main

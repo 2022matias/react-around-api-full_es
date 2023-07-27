@@ -23,7 +23,6 @@ function Login(props) {
     auth.authorize({ email, password })
       .then((data) => {
         if (data?.token) {
-          props.updateEmail(email);
           setEmail('');
           setPassword('');
           props.setIsLoggedIn(true);
