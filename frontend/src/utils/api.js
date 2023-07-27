@@ -85,7 +85,7 @@ export class Api {
         ...this._header
       },
     };
-    return this.returnFetch(`cards/likes/${cardId}`, requestOptions);
+    return this.returnFetch(`cards/${cardId}/likes`, requestOptions);
   }
 
   removeLike(cardId, token) {
@@ -96,11 +96,11 @@ export class Api {
         ...this._header
       },
     };
-    return this.returnFetch(`cards/likes/${cardId}`, requestOptions);
+    return this.returnFetch(`cards/${cardId}/likes`, requestOptions);
   }
 
-  changeLikeCardStatus(cardId, liked) {
-    return liked ? this.giveLike(cardId) : this.removeLike(cardId);
+  changeLikeCardStatus(cardId, liked, token) {
+    return liked ? this.giveLike(cardId, token) : this.removeLike(cardId, token);
   }
 
   updateAvatar(avatar, token) {
