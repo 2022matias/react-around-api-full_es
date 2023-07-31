@@ -123,8 +123,6 @@ export default function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
-    console.log(isLiked, 'isliked');
-    console.log(currentUser._id, 'currentuserid');
     api.changeLikeCardStatus(card._id, !isLiked, token).then((res) => {
       setCards((cards) => cards.map((c) => c._id === card._id ? res.data : c));
     });
@@ -146,6 +144,7 @@ export default function App() {
     setToken(null);
     setEmail("");
     setIsLoggedIn(false);
+    navigate('/signin');
   }
   return (
     <div className="page">
