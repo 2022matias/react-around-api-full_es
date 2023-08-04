@@ -6,8 +6,8 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 const allowedCors = [
-  'https://matias-sprint16.chickenkiller.com',
-  'http://matias-sprint16.chickenkiller.com',
+  'https://mati-sprint16.chickenkiller.com',
+  'http://mati-sprint16.chickenkiller.com',
   'http://localhost:3000',
   'https://localhost:3000',
   'http://localhost:3001',

@@ -122,7 +122,8 @@ export class Api {
 const api = new Api({
   // authorization: "61c6f68c-f2f6-410f-a75d-8fc57629e184",
   // baseUrl: "https://around.nomoreparties.co/v1/web_es_cohort_04",
-  baseUrl: "http://localhost:3000",
+//  baseUrl: "http://localhost:3000",
+baseUrl: "http://api.mati-sprint16.chickenkiller.com"
 });
 
 

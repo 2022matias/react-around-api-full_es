@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://api.mati-sprint16.chickenkiller.com";
 // export const BASE_URL = "https://register.nomoreparties.co";
 
 export const register = ({ email, password }) => {
