@@ -11,8 +11,7 @@ const getCards = (req, res, next) => {
       res.send({ data: cards });
     })
     .catch(next);
-}
-
+};
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
@@ -26,7 +25,7 @@ const createCard = (req, res, next) => {
       res.send({ data: card });
     })
     .catch(next);
-}
+};
 
 const deleteCard = (req, res, next) => {
   Card.findOneAndRemove({ _id: req.params.id, owner: req.user._id })
@@ -75,4 +74,4 @@ module.exports = {
   deleteCard,
   likeCard,
   dislikeCard,
-}
+};

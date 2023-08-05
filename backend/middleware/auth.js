@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 const auth = (req, res, next) => {
@@ -11,14 +12,13 @@ const auth = (req, res, next) => {
   let payload;
 
   try {
-    // payload = jwt.verify(token, 'secret-key');
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
     return res.status(401).send({ message: 'Se requiere autorización' });
   }
   req.user = payload;
 
-  next();
+  return next();
 };
 
 module.exports = { auth };
