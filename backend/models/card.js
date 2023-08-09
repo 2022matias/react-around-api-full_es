@@ -13,7 +13,7 @@ const cardSchema = new Schema({
     type: String,
     required: true,
     validate: {
-      validator: function (v) {
+      validator: function isValid(v) {
         return /^(http|https):\/\/[^ "]+$/.test(v);
       },
       message: 'No es un link válido',

@@ -10,16 +10,6 @@ const routerUser = require('./routes/users');
 const routerCards = require('./routes/cards');
 const { login } = require('./controllers/login');
 
-const allowedCors = [
-  'https://mati-sprint16.chickenkiller.com',
-  'http://mati-sprint16.chickenkiller.com',
-  'www.mati-sprint16.chickenkiller.com',
-  'http://localhost:3000',
-  'https://localhost:3000',
-  'http://localhost:3001',
-  'https://localhost:3001',
-];
-
 const { PORT = 3000 } = process.env;
 
 const app = express();
@@ -31,23 +21,6 @@ mongoose.connect('mongodb://localhost:27017/aroundb')
     console.error(`Error connecting to the database. \n${err}`);
   });
 app.use(bodyParser.json());
-
-app.use((req, res, next) => {
-  const { origin } = req.headers;
-  const { method } = req;
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-  const requestHeaders = req.headers['access-control-request-headers'];
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    return res.end();
-  }
-  next();
-  return null;
-});
 
 app.use(cors());
 app.options('*', cors());
@@ -81,7 +54,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).send({
     message: statusCode === 500
       ? message
-      : message,
+      : 'Hay un error en el servidor',
   });
 });
 
