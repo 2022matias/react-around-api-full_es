@@ -1,10 +1,10 @@
-import Logo from "../images/Logo.png";
-import Line from "../images/Line.png";
-import { Link, useLocation } from "react-router-dom";
+import Logo from '../images/Logo.png';
+import Line from '../images/Line.png';
+import { Link, useLocation } from 'react-router-dom';
 
 function Header(props) {
   const location = useLocation();
-  const isSigninRoute = location.pathname === "/signin";
+  const isSigninRoute = location.pathname === '/signin';
 
   return (
     <header className="header">

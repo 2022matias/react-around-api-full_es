@@ -1,7 +1,7 @@
-import React from "react";
-import PopupWithForm from "./PopupWithForm";
-import closeIcon from "../images/close-icon.png";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import React from 'react';
+import PopupWithForm from './PopupWithForm';
+import closeIcon from '../images/close-icon.png';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function EditProfilePopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -10,7 +10,7 @@ export default function EditProfilePopup(props) {
 
   React.useEffect(() => {
     setName(currentUser.name);
-    setDescription(currentUser.about)
+    setDescription(currentUser.about);
   }, []);
 
   function handleSubmit(e) {
@@ -64,6 +64,6 @@ export default function EditProfilePopup(props) {
         <button type="submit" className="popup__button">Guardar</button>
       </form>
     </PopupWithForm>
-  )
+  );
 }
 

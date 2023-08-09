@@ -1,6 +1,6 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import * as auth from "../utils/auth";
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import * as auth from '../utils/auth';
 
 function Login(props) {
   const [email, setEmail] = React.useState();
@@ -27,7 +27,7 @@ function Login(props) {
           setPassword('');
           props.setIsLoggedIn(true);
           props.setToken(data.token);
-          navigate("/");
+          navigate('/');
         }
         else {
           props.onIsRegister(false);

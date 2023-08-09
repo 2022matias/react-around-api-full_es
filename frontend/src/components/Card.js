@@ -1,5 +1,5 @@
-import React from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card(props) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -7,13 +7,13 @@ function Card(props) {
   const isLiked = props.card.likes.some(i => i === currentUser._id);
   const cardlikeButtonClassName = isLiked ? 'element__heart element__heart-black' : 'element__heart';
   function handleClickCard() {
-    props.onCardClick(props.card)
+    props.onCardClick(props.card);
   }
   function handleLikeClick() {
-    props.onCardLike(props.card)
+    props.onCardLike(props.card);
   }
   function handleCardDelete() {
-    props.onCardDelete(props.card)
+    props.onCardDelete(props.card);
   }
 
   return (
@@ -37,7 +37,7 @@ function Card(props) {
         </div>
       </article>
     </>
-  )
+  );
 }
 
 export default Card;
