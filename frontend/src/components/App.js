@@ -1,22 +1,22 @@
-import React from "react";
-import api from "../utils/api";
-import Footer from "./Footer";
-import Header from "./Header";
-import Main from "./Main";
-import PopupWithForm from "./PopupWithForm";
-import closeIcon from "../images/close-icon.png";
-import ImagePopup from "./ImagePopup";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import InfoTooltip from "./InfoTooltip";
+import React from 'react';
+import api from '../utils/api';
+import Footer from './Footer';
+import Header from './Header';
+import Main from './Main';
+import PopupWithForm from './PopupWithForm';
+import closeIcon from '../images/close-icon.png';
+import ImagePopup from './ImagePopup';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import InfoTooltip from './InfoTooltip';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import Register from "./Register";
-import Login from "./Login";
-import ProtectedRoute from "./ProtectedRoute";
+import Register from './Register';
+import Login from './Login';
+import ProtectedRoute from './ProtectedRoute';
 import { useNavigate } from 'react-router-dom';
-import * as auth from "../utils/auth";
+import * as auth from '../utils/auth';
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(true);
@@ -30,7 +30,7 @@ export default function App() {
   const [selectedCard, setSelectedCard] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState([]);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState("");
+  const [email, setEmail] = React.useState('');
   const [isRegister, setIsRegister] = React.useState(false);
   const [token, setToken] = React.useState(localStorage.getItem('token'));
   const [user, setUser] = React.useState('');
@@ -49,7 +49,7 @@ export default function App() {
             alert('El token no es válido.');
             navigate('/signin');
           }
-        })
+        });
     }
   }, [isLoggedIn]);
 
@@ -58,10 +58,10 @@ export default function App() {
       api.getUserInfo(token).then((data) => {
         setCurrentUser(data.user);
         setUser(data.user._id);
-      })
+      });
       api.getCards(token).then((res) => {
         setCards(res.data);
-      })
+      });
     } else {
       navigate('/signin');
     }
@@ -97,28 +97,28 @@ export default function App() {
 
   function onCardClick(card) {
     setIsImagePopupOpen(!isImagePopupOpen);
-    setSelectedCard(card)
+    setSelectedCard(card);
   }
 
   function handleUpdateUser({ name, about }) {
     api.editProfile(name, about, token).then((res) => {
       setCurrentUser(res);
       onEditProfileClick();
-    })
+    });
   }
 
   function handleUpdateAvatar({ avatar }) {
     api.updateAvatar(avatar, token).then((res) => {
       setCurrentUser(res);
       onEditAvatarClick();
-    })
+    });
   }
 
   function handleUpdatePlace({ name, link }) {
     api.addCard(name, link, token).then((res) => {
       setCards([res.data, ...cards]);
       onAddPlaceClick();
-    })
+    });
   }
 
   function handleCardLike(card) {
@@ -142,7 +142,7 @@ export default function App() {
   function signOut() {
     localStorage.removeItem('token');
     setToken(null);
-    setEmail("");
+    setEmail('');
     setIsLoggedIn(false);
     navigate('/signin');
   }

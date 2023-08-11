@@ -18,7 +18,8 @@
     "test": "jest",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "lint": "npx eslint ."
   },
   "eslintConfig": {
     "extends": [
@@ -39,6 +40,9 @@
     ]
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.46.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "gh-pages": "^5.0.0",
     "jest": "^27.5.1"
   }

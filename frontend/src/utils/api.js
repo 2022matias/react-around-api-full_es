@@ -1,7 +1,7 @@
 export class Api {
   constructor(options) {
     this._options = options;
-    this._header = { "Content-Type": "application/json" }
+    this._header = { 'Content-Type': 'application/json' };
   }
 
   returnFetch(url, requestOptions) {
@@ -12,32 +12,32 @@ export class Api {
 
   getUserInfo(token) {
     const requestOptions = {
-      method: "GET",
+      method: 'GET',
       headers: {
         authorization: `Bearer ${token}`,
-        ...this._header
-      }
+        ...this._header,
+      },
     };
-    return this.returnFetch("users/me", requestOptions);
+    return this.returnFetch('users/me', requestOptions);
   }
 
   getCards(token) {
     const requestOptions = {
-      method: "GET",
+      method: 'GET',
       headers: {
         authorization: `Bearer ${token}`,
-        ...this._header
-      }
+        ...this._header,
+      },
     };
-    return this.returnFetch("cards", requestOptions);
+    return this.returnFetch('cards', requestOptions);
   }
 
   editProfile(name, about, token) {
     const requestOptions = {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
         authorization: `Bearer ${token}`,
-        ...this._header
+        ...this._header,
       },
       body: JSON.stringify({
         name: name,
@@ -45,33 +45,30 @@ export class Api {
       }),
     };
 
-    return this.returnFetch("users/me", requestOptions);
+    return this.returnFetch('users/me', requestOptions);
   }
 
   addCard(name, link, token) {
     const requestOptions = {
-      method: "POST",
+      method: 'POST',
       headers: {
         authorization: `Bearer ${token}`,
-        ...this._header
+        ...this._header,
       },
       body: JSON.stringify({
         name: name,
         link: link,
       }),
     };
-    return this.returnFetch("cards", requestOptions);
+    return this.returnFetch('cards', requestOptions);
   }
-
-
-
 
   deleteCard(_id, token) {
     const requestOptions = {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         authorization: `Bearer ${token}`,
-        ...this._header
+        ...this._header,
       },
     };
     return this.returnFetch(`cards/${_id}`, requestOptions);
@@ -79,10 +76,10 @@ export class Api {
 
   giveLike(cardId, token) {
     const requestOptions = {
-      method: "PUT",
+      method: 'PUT',
       headers: {
         authorization: `Bearer ${token}`,
-        ...this._header
+        ...this._header,
       },
     };
     return this.returnFetch(`cards/${cardId}/likes`, requestOptions);
@@ -90,10 +87,10 @@ export class Api {
 
   removeLike(cardId, token) {
     const requestOptions = {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         authorization: `Bearer ${token}`,
-        ...this._header
+        ...this._header,
       },
     };
     return this.returnFetch(`cards/${cardId}/likes`, requestOptions);
@@ -105,26 +102,22 @@ export class Api {
 
   updateAvatar(avatar, token) {
     const requestOptions = {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
         authorization: `Bearer ${token}`,
-        ...this._header
+        ...this._header,
       },
       body: JSON.stringify({
         avatar,
       }),
     };
 
-    return this.returnFetch("users/me", requestOptions);
+    return this.returnFetch('users/me', requestOptions);
   }
 }
 
 const api = new Api({
-  // authorization: "61c6f68c-f2f6-410f-a75d-8fc57629e184",
-  // baseUrl: "https://around.nomoreparties.co/v1/web_es_cohort_04",
-//  baseUrl: "http://localhost:3000",
-baseUrl: "http://api.mati-sprint16.chickenkiller.com"
+  baseUrl: 'https://api.mati-sprint16.chickenkiller.com',
 });
-
 
 export default api;

@@ -1,7 +1,7 @@
 import React from 'react';
-import PopupWithForm from "./PopupWithForm";
-import closeIcon from "../images/close-icon.png";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import PopupWithForm from './PopupWithForm';
+import closeIcon from '../images/close-icon.png';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditAvatarPopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -13,7 +13,7 @@ function EditAvatarPopup(props) {
 
 
   function handleInputChange(e) {
-    setAvatar(e.target.value)
+    setAvatar(e.target.value);
   }
 
   function handleSubmit(e) {
@@ -44,7 +44,7 @@ function EditAvatarPopup(props) {
         <button className="popup__button popup__button-avatar">Guardar</button>
       </form>
     </PopupWithForm>
-  )
+  );
 }
 
 export default EditAvatarPopup;

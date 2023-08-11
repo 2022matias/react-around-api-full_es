@@ -1,9 +1,9 @@
-import closeIcon from "../images/close-icon.png";
+import closeIcon from '../images/close-icon.png';
 
 export default function ImagePopup(props) {
-	return (
-		<>
-		<section className={`enlarge-image ${props.isOpen ? 'no-vision' : ''}`}>
+  return (
+    <>
+      <section className={`enlarge-image ${props.isOpen ? 'no-vision' : ''}`}>
         <div className="enlarge-image__container">
           <h3 className="enlarge-image__title">{props.card.name}</h3>
           <img 
@@ -13,13 +13,13 @@ export default function ImagePopup(props) {
           />
           <img
             src={closeIcon} 
-						onClick={props.onCardClick}
+            onClick={props.onCardClick}
             className="enlarge-image__close-image"
             alt="boton para cerrar el formulario"
           />
         </div>
         <div className="fondo"></div>
       </section>
-		</>
-	)
+    </>
+  );
 }

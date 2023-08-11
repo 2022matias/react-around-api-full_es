@@ -1,6 +1,6 @@
 import React from 'react';
-import PopupWithForm from "./PopupWithForm";
-import closeIcon from "../images/close-icon.png";
+import PopupWithForm from './PopupWithForm';
+import closeIcon from '../images/close-icon.png';
 
 function AddPlacePopup(props) {
   const [place, setPlace] = React.useState();
@@ -11,7 +11,7 @@ function AddPlacePopup(props) {
     props.onAddPlace({
       name: place,
       link: url,
-    })
+    });
   }
 
   function handleInputChangePlace(e) {
@@ -52,7 +52,7 @@ function AddPlacePopup(props) {
         <button className="popup__button">Crear</button>
       </form>
     </PopupWithForm>
-  )
+  );
 }
 
 export default AddPlacePopup;
