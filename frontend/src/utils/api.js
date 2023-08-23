@@ -123,8 +123,7 @@ export class Api {
 }
 
 const api = new Api({
-  // baseUrl: 'https://api.mati-sprint16.chickenkiller.com',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.mati-sprint16.chickenkiller.com',
 });
 
 export default api;
