@@ -26,7 +26,7 @@ function EditAvatarPopup(props) {
   return (
     <PopupWithForm name={'avatar'}
       isOpen={props.isOpen}>
-      <form onSubmit={handleSubmit} className="popup__container popup__container-avatar" noValidate>
+      <form onSubmit={handleSubmit} className="popup__container popup__container-avatar">
         <img
           src={closeIcon}
           className="popup__close-icon close-avatar" onClick={props.onClose}

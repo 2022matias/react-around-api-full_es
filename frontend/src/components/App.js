@@ -118,6 +118,8 @@ export default function App() {
     api.addCard(name, link, token).then((res) => {
       setCards([res.data, ...cards]);
       onAddPlaceClick();
+    }).catch(error => {
+      console.error(error);
     });
   }
 

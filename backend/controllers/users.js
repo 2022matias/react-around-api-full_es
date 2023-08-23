@@ -39,7 +39,7 @@ const getUserById = (req, res, next) => {
 const updateProfile = (req, res, next) => {
   const { name, about, avatar } = req.body;
 
-  User.findByIdAndUpdate(req.user._id, { name, about, avatar }, { new: true })
+  User.findByIdAndUpdate(req.user._id, { name, about, avatar }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
         throw notFoundError('Usuario no encontrado');

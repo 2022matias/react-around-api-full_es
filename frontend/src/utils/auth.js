@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://api.mati-sprint16.chickenkiller.com';
+// export const BASE_URL = 'https://api.mati-sprint16.chickenkiller.com';
+export const BASE_URL = 'http://localhost:3000';
 
 export const register = ({ email, password }) => fetch(`${BASE_URL}/signup`, {
   method: 'POST',

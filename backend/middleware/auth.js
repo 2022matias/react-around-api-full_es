@@ -6,7 +6,7 @@ const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    return res.status(401).send({ message: 'Se requiere autorización' });
+    return res.status(403).send({ message: 'Acceso denegado' });
   }
   const token = authorization.replace('Bearer ', '');
   let payload;
@@ -14,7 +14,7 @@ const auth = (req, res, next) => {
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
-    return res.status(401).send({ message: 'Se requiere autorización' });
+    return res.status(403).send({ message: 'Acceso denegado' });
   }
   req.user = payload;
 

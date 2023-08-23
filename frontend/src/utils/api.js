@@ -6,8 +6,14 @@ export class Api {
 
   returnFetch(url, requestOptions) {
     return fetch(`${this._options.baseUrl}/${url}`, requestOptions)
-      .then((res) => res.json())
-      .catch((res) => Promise.reject(`Error: ${res.status}`));
+      .then(async (res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        const json = await res.json();
+        throw new Error(json.message);
+      })
+      .catch((res) => Promise.reject(`${res}`));
   }
 
   getUserInfo(token) {
@@ -117,7 +123,8 @@ export class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://api.mati-sprint16.chickenkiller.com',
+  // baseUrl: 'https://api.mati-sprint16.chickenkiller.com',
+  baseUrl: 'http://localhost:3000',
 });
 
 export default api;
