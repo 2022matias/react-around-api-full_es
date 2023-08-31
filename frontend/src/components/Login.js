@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as auth from '../utils/auth';
 
 function Login(props) {
-  const [email, setEmail] = React.useState();
-  const [password, setPassword] = React.useState();
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
 
   function handleChangeEmail(event) {

@@ -51,7 +51,7 @@ export default function App() {
           }
         });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   React.useEffect(() => {
     if (token) {
@@ -66,10 +66,6 @@ export default function App() {
       navigate('/signin');
     }
   }, [token]);
-
-
-
-
 
   function onEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);

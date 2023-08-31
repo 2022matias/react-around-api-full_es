@@ -16,20 +16,11 @@ const userSchema = new Schema({
     default: 'Explorador',
   },
 
-  // avatar: {
-  //   type: String,
-  //   required: true,
-  //   validate: {
-  //     validator: function isValid(v) {
-  //       return /^(http|https):\/\/[^ "]+$/.test(v);
-  //     },
-  //     message: 'No es un link válido',
-  //   },
-  // },
   avatar: {
     type: String,
+    required: true,
     validate: {
-      validator: function (v) {
+      validator: function isValid(v) {
         return /^(http|https):\/\/[^ "]+$/.test(v);
       },
       message: 'El link no es correcto',

@@ -5,13 +5,19 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function EditProfilePopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState();
-  const [description, setDescription] = React.useState();
+  const [name, setName] = React.useState(currentUser.name || '');
+  const [description, setDescription] = React.useState(currentUser.about || '');
 
   React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, []);
+    setName(currentUser.name || '');
+    setDescription(currentUser.about || '');
+  }, [currentUser.name, currentUser.about]);
+
+
+  React.useEffect(() => {
+    setName("");
+    setDescription("");
+  }, [props.isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,6 +26,7 @@ export default function EditProfilePopup(props) {
       about: description,
     });
   }
+
   function handleInputChangeName(e) {
     setName(e.target.value);
   }
@@ -47,6 +54,7 @@ export default function EditProfilePopup(props) {
           minLength="2"
           maxength="40"
           required
+          value={name}
         />
         <span className="popup__name-input-error"></span>
         <input
@@ -59,6 +67,7 @@ export default function EditProfilePopup(props) {
           minLength="2"
           maxength="200"
           required
+          value={description}
         />
         <span className="popup__skill-input-error"></span>
         <button type="submit" className="popup__button">Guardar</button>
@@ -66,4 +75,3 @@ export default function EditProfilePopup(props) {
     </PopupWithForm>
   );
 }
-

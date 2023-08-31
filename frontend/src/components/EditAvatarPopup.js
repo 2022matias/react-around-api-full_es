@@ -5,11 +5,15 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditAvatarPopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [avatar, setAvatar] = React.useState();
+  const [avatar, setAvatar] = React.useState(currentUser.avatar || '');
 
   React.useEffect(() => {
-    setAvatar(currentUser.avatar);
-  }, []);
+    setAvatar(currentUser.avatar || '');
+  }, [currentUser.avatar]);
+
+  React.useEffect(() => {
+    setAvatar("");
+  }, [props.isOpen]);
 
 
   function handleInputChange(e) {
@@ -39,6 +43,7 @@ function EditAvatarPopup(props) {
           type="url"
           className="popup__url popup__input"
           placeholder="Enlace a la imagen"
+          value={avatar}
         />
         <span className="popup__avatar-input-error"></span>
         <button className="popup__button popup__button-avatar">Guardar</button>
